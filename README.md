@@ -1,8 +1,6 @@
-# strong-todo
-
 ## Screenshots
 
-![App Screenshot](screenshot.png)
+![App Screenshot](./assets/screenshot.png)
 
 ## Installation and Setup Instructions
 
