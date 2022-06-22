@@ -7,6 +7,11 @@ const Todo = ({ todo }) => {
     console.log(todo);
   };
 
+  const handleDelete = (event) => {
+    event.preventDefault();
+    console.log(event.target);
+  };
+
   return (
     <li className="todo">
       <div className="todo-checkbox">
@@ -20,7 +25,7 @@ const Todo = ({ todo }) => {
         />
         <label htmlFor={`todoCheckbox-${todo._id}`}>{todo.todo}</label>
       </div>
-      <button type="button" className="todo-delete">
+      <button type="button" className="todo-delete" onClick={handleDelete}>
         x
       </button>
     </li>
