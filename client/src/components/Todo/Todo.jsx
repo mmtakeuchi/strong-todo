@@ -1,15 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { TodoContext } from '../../todoContext';
 import './Todo.scss';
 
 const Todo = ({ todo }) => {
+  const { removeTodo } = useContext(TodoContext);
+
   const handleCheck = (event) => {
     console.log(event.target);
     console.log(todo);
   };
 
   const handleDelete = (event) => {
-    event.preventDefault();
-    console.log(event.target);
+    removeTodo(todo._id);
   };
 
   return (

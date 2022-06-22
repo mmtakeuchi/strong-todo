@@ -23,8 +23,8 @@ export const postTodo = async (url, newTodo) => {
 
 export const deleteTodo = async (url, todoId) => {
   try {
-    const response = await axios.delete(url, todoId).then((resp) => resp);
-    console.log(response);
+    const response = await axios.delete(url, todoId).then((resp) => resp.data);
+
     return response;
   } catch (error) {
     console.log(error);

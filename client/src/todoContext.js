@@ -21,7 +21,8 @@ export const TodoContextProvider = ({ children }) => {
 
   const removeTodo = async (todoId) => {
     await deleteTodo(`/api/todos/${todoId}`);
-    const remainingTodos = todos.filer((todo) => todo.id !== todoId);
+
+    const remainingTodos = todos.filter((todo) => todo._id !== todoId);
     setTodos(remainingTodos);
   };
 

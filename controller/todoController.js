@@ -34,9 +34,9 @@ module.exports.addTodo = async (req, res) => {
 module.exports.deleteTodo = async (req, res) => {
   try {
     const deletedTodoId = req.params.id;
-    await Todo.findByIdAndDelete(deletedTodoId).then((todo) =>
-      res.send('Successfully deleted todo')
-    );
+
+    await Todo.findByIdAndDelete(deletedTodoId);
+    res.send('Successfully deleted todo');
   } catch (error) {
     console.log(error);
     res.send('Error deleting todo.');
