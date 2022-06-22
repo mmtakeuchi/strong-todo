@@ -1,10 +1,12 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { TodoContext } from '../../todoContext';
 import Todo from '../Todo/Todo';
+import { getTodos } from '../../utils';
 import './TodoList.scss';
 
 const TodoList = () => {
   const { todos } = useContext(TodoContext);
+
   return (
     <React.Fragment>
       {todos.length ? (

@@ -1,8 +1,9 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { fetchTodos, postTodo, deleteTodo } from './utils';
+import { getTodos, postTodo, putTodo, deleteTodo } from './utils';
 
 export const TodoContext = createContext({
   todos: [],
+  update: false,
   getTodos: () => {},
   addTodo: () => {},
   removeTodo: () => {},
@@ -10,13 +11,28 @@ export const TodoContext = createContext({
 
 export const TodoContextProvider = ({ children }) => {
   const [todos, setTodos] = useState([]);
+  const [update, setUpdate] = useState(false);
 
   const addTodo = async (newTodo) => {
     const newTask = { todo: newTodo, completed: false };
     const addedTodo = await postTodo('/api/todos', newTask);
 
     const newTodos = [...todos, addedTodo];
+    setUpdate(!update);
     setTodos(newTodos);
+  };
+
+  const updateTodo = async (editedTodo) => {
+    const updatedTodo = await putTodo(
+      `/api/todos/${editedTodo._id}`,
+      editedTodo
+    );
+    const updatedTodoList = [
+      ...todos.filter((task) => task._id !== editedTodo._id),
+      updatedTodo,
+    ];
+    setUpdate(!update);
+    setTodos(updatedTodoList);
   };
 
   const removeTodo = async (todoId) => {
@@ -27,16 +43,19 @@ export const TodoContextProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    const getTodos = async () => {
-      const todos = await fetchTodos('/api/todos');
+    const fetchTodos = async () => {
+      const todos = await getTodos('/api/todos');
 
       setTodos(todos);
     };
-    getTodos();
-  }, []);
+
+    fetchTodos();
+  }, [update]);
 
   return (
-    <TodoContext.Provider value={{ todos, setTodos, addTodo, removeTodo }}>
+    <TodoContext.Provider
+      value={{ todos, setTodos, addTodo, updateTodo, removeTodo }}
+    >
       {children}
     </TodoContext.Provider>
   );

@@ -1,17 +1,23 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { TodoContext } from '../../todoContext';
 import './Todo.scss';
 
 const Todo = ({ todo }) => {
-  const { removeTodo } = useContext(TodoContext);
+  const [isEditing, setIsEditing] = useState(false);
+  const { updateTodo, removeTodo } = useContext(TodoContext);
 
   const handleCheck = (event) => {
-    console.log(event.target);
     console.log(todo);
+    updateTodo({ ...todo, completed: !todo.completed });
   };
 
   const handleDelete = (event) => {
     removeTodo(todo._id);
+  };
+
+  const editTodo = (event) => {
+    setIsEditing(!isEditing);
+    console.log(isEditing);
   };
 
   return (
@@ -20,16 +26,26 @@ const Todo = ({ todo }) => {
         <input
           type="checkbox"
           id={`todoCheckbox-${todo._id}`}
-          name={todo}
-          // checked={todo.completed}
-          value={todo}
+          name={todo.todo}
+          checked={todo.completed}
+          value={todo.todo}
           onChange={handleCheck}
         />
-        <label htmlFor={`todoCheckbox-${todo._id}`}>{todo.todo}</label>
+        <label
+          htmlFor={`todoCheckbox-${todo._id}`}
+          className={todo.completed ? 'todo-completed' : ''}
+        >
+          {todo.todo}
+        </label>
       </div>
-      <button type="button" className="todo-delete" onClick={handleDelete}>
-        x
-      </button>
+      <div className="todo-buttons">
+        <button type="button" className="todo-edit" onClick={editTodo}>
+          Edit
+        </button>
+        <button type="button" className="todo-delete" onClick={handleDelete}>
+          x
+        </button>
+      </div>
     </li>
   );
 };

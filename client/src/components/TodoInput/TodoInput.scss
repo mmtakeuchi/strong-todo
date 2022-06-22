@@ -21,13 +21,14 @@
 
   button {
     cursor: pointer;
+    align-self: flex-start;
     background: #fff;
     color: #023e8a;
     font-weight: bold;
     border: 1px solid #023e8a;
     border-radius: 5px;
     width: 110px;
-    padding: 5px;
+    padding: 2px;
     box-shadow: 0 3px #03045e;
 
     &:active {

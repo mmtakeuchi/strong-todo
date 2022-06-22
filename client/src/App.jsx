@@ -8,7 +8,7 @@ const App = () => {
   return (
     <div className="App">
       <TodoContextProvider>
-        <TodoInput />
+        <TodoInput label="ADD NEW TODO" />
         <TodoList />
       </TodoContextProvider>
     </div>

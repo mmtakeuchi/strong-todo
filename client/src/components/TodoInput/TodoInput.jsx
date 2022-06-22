@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { TodoContext } from '../../todoContext';
 import './TodoInput.scss';
 
-const TodoInput = () => {
+const TodoInput = ({ label }) => {
   const [input, setInput] = useState('');
   const { addTodo } = useContext(TodoContext);
 
@@ -12,6 +12,9 @@ const TodoInput = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    if (input.length === 0) {
+      return;
+    }
     addTodo(input);
     setInput('');
   };
@@ -23,10 +26,9 @@ const TodoInput = () => {
         value={input}
         onChange={handleInputChange}
         placeholder="Enter todo"
-        required
       />
       <button type="submit" onClick={handleSubmit}>
-        ADD NEW TODO
+        {label}
       </button>
     </form>
   );
