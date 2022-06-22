@@ -4,11 +4,21 @@
 
 ## Installation and Setup Instructions
 
-Clone down this repository. You will need `node` and `npm` installed globally on your machine.
-
 ### Installation:
 
-`npm install`
+Clone repo.
+`git clone https://github.com/mmtakeuchi/strong-todo`
+`cd strong-todo`
+
+Install dependencies in both client and server.
+
+```
+cd client
+npm install or yarn install
+
+cd ..
+npm install or yarn install
+```
 
 ### Setup MongoDB
 
