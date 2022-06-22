@@ -1,14 +1,15 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { TodoContext } from '../../todoContext';
 import Todo from '../Todo/Todo';
-import { getTodos } from '../../utils';
 import './TodoList.scss';
 
 const TodoList = () => {
   const { todos } = useContext(TodoContext);
 
+  todos.sort((a, b) => b.completed - a.completed);
+
   return (
-    <React.Fragment>
+    <div className="list-container">
       {todos.length ? (
         <ul className="todo-list">
           {todos?.map((todo, i) => (
@@ -18,7 +19,7 @@ const TodoList = () => {
       ) : (
         <div className="todo-empty">No tasks</div>
       )}
-    </React.Fragment>
+    </div>
   );
 };
 

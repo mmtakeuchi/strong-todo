@@ -1,10 +1,10 @@
-.todo-form {
+.edit-todo {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   width: 100%;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 
   input[type='text'] {
     padding: 10px 15px;
@@ -20,7 +20,8 @@
     }
 
     @media screen and (max-width: 350px) {
-      width: 45%;
+      width: 100%;
+      margin-bottom: 5px;
     }
   }
 
@@ -46,6 +47,10 @@
     &:hover {
       background: #023e8a;
       color: #fff;
+    }
+
+    @media screen and (max-width: 350px) {
+      width: 100%;
     }
   }
 }

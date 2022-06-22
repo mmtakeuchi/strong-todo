@@ -1,16 +1,19 @@
-import React from 'react';
-import { TodoContextProvider } from './todoContext';
+import React, { useContext } from 'react';
+import { TodoContext } from './todoContext';
 import TodoInput from './components/TodoInput/TodoInput';
 import TodoList from './components/TodoList/TodoList';
+import TodosCompleted from './components/TodosCompleted/TodosCompleted';
 import './App.css';
 
 const App = () => {
+  const { addTodo } = useContext(TodoContext);
+
   return (
     <div className="App">
-      <TodoContextProvider>
-        <TodoInput label="ADD NEW TODO" />
-        <TodoList />
-      </TodoContextProvider>
+      <h1>Todo</h1>
+      <TodoInput label="add todo" onSubmit={addTodo} />
+      <TodoList />
+      <TodosCompleted />
     </div>
   );
 };

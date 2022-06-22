@@ -1,10 +1,10 @@
 import React, { useContext, useState } from 'react';
 import { TodoContext } from '../../todoContext';
-import './TodoInput.scss';
+import './EditTodo.scss';
 
-const TodoInput = () => {
-  const { addTodo } = useContext(TodoContext);
-  const [input, setInput] = useState('');
+const EditTodo = ({ todo, toggleEdit }) => {
+  const [input, setInput] = useState(todo.todo);
+  const { updateTodo } = useContext(TodoContext);
 
   const handleInputChange = (event) => {
     setInput(event.target.value);
@@ -15,21 +15,23 @@ const TodoInput = () => {
     if (input.length === 0) {
       return;
     }
-    addTodo(input);
+
+    updateTodo({ ...todo, todo: input });
     setInput('');
+    toggleEdit();
   };
 
   return (
-    <form className="todo-form" onSubmit={handleSubmit}>
+    <form className="edit-todo" onSubmit={handleSubmit}>
       <input
         type="text"
         value={input}
         onChange={handleInputChange}
         placeholder="Enter todo"
       />
-      <button type="submit">add todo</button>
+      <button type="submit">update</button>
     </form>
   );
 };
 
-export default TodoInput;
+export default EditTodo;
