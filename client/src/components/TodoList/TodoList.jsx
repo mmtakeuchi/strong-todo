@@ -1,19 +1,32 @@
-import React, { useContext } from 'react';
+import React, { useCallback, useContext } from 'react';
 import { TodoContext } from '../../todoContext';
 import Todo from '../Todo/Todo';
 import './TodoList.scss';
 
 const TodoList = () => {
-  const { todos } = useContext(TodoContext);
+  const { todos, setTodos } = useContext(TodoContext);
 
-  todos.sort((a, b) => b.completed - a.completed);
+  const moveTask = useCallback(
+    (dragIndex, hoverIndex) => {
+      const dragItem = todos[dragIndex];
+      const hoverItem = todos[hoverIndex];
+      // Swap places of dragItem and hoverItem in the todos array
+      setTodos((todos) => {
+        const updatedTodos = [...todos];
+        updatedTodos[dragIndex] = hoverItem;
+        updatedTodos[hoverIndex] = dragItem;
+        return updatedTodos;
+      });
+    },
+    [setTodos, todos]
+  );
 
   return (
     <div className="list-container">
       {todos.length ? (
         <ul className="todo-list">
           {todos?.map((todo, i) => (
-            <Todo todo={todo} key={i} />
+            <Todo todo={todo} index={i} key={todo._id} moveTask={moveTask} />
           ))}
         </ul>
       ) : (

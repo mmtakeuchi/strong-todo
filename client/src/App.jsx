@@ -1,4 +1,6 @@
 import React, { useContext } from 'react';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 import { TodoContext } from './todoContext';
 import TodoInput from './components/TodoInput/TodoInput';
 import TodoList from './components/TodoList/TodoList';
@@ -10,10 +12,12 @@ const App = () => {
 
   return (
     <div className="App">
-      <h1>Todo</h1>
-      <TodoInput label="add todo" onSubmit={addTodo} />
-      <TodoList />
-      <TodosCompleted />
+      <DndProvider backend={HTML5Backend}>
+        <h1>Todo</h1>
+        <TodoInput label="add todo" onSubmit={addTodo} />
+        <TodoList />
+        <TodosCompleted />
+      </DndProvider>
     </div>
   );
 };
