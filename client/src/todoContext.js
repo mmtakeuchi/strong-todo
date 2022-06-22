@@ -9,18 +9,14 @@ export const TodoContext = createContext({
 });
 
 export const TodoContextProvider = ({ children }) => {
-  const [todos, setTodos] = useState([
-    { id: 1, todo: 'React medium', completed: false },
-  ]);
-
-  console.log(todos);
+  const [todos, setTodos] = useState([]);
 
   const addTodo = async (newTodo) => {
     const newTask = { todo: newTodo, completed: false };
     const addedTodo = await postTodo('/api/todos', newTask);
-    console.log(addedTodo);
+
     const newTodos = [...todos, addedTodo];
-    // setTodos(newTodos);
+    setTodos(newTodos);
   };
 
   const removeTodo = async (todoId) => {
@@ -32,7 +28,7 @@ export const TodoContextProvider = ({ children }) => {
   useEffect(() => {
     const getTodos = async () => {
       const todos = await fetchTodos('/api/todos');
-      console.log(todos);
+
       setTodos(todos);
     };
     getTodos();

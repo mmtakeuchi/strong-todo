@@ -1,0 +1,30 @@
+.todo {
+  width: 350px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 16px;
+  font-weight: 400;
+
+  &-checkbox {
+    margin: 5px 0;
+  }
+
+  input[type='checkbox'] {
+    margin-right: 10px;
+  }
+
+  &-delete {
+    cursor: pointer;
+    background: #bd1f36;
+    border: none;
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    color: #fff;
+
+    &:hover {
+      background: #e01e37;
+    }
+  }
+}

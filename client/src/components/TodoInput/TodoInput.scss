@@ -1,8 +1,9 @@
-.todo__form {
+.todo-form {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  margin-bottom: 10px;
 
   input[type='text'] {
     padding: 10px 15px;

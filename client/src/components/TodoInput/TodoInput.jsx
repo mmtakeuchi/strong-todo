@@ -17,7 +17,7 @@ const TodoInput = () => {
   };
 
   return (
-    <form className="todo__form">
+    <form className="todo-form">
       <input
         type="text"
         value={input}
