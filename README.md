@@ -7,8 +7,11 @@
 ### Installation:
 
 Clone repo.
-`git clone https://github.com/mmtakeuchi/strong-todo`
-`cd strong-todo`
+
+```
+git clone https://github.com/mmtakeuchi/strong-todo
+cd strong-todo
+```
 
 Install dependencies in both client and server.
 
