@@ -4,7 +4,6 @@ const Todo = require('../model/Todo');
 module.exports.getTodos = async (req, res) => {
   try {
     const todos = await Todo.find({}).sort({ date: -1 });
-    console.log(todos);
 
     if (!todos) {
       res.send('Error getting todos.');
@@ -20,10 +19,8 @@ module.exports.getTodos = async (req, res) => {
 // POST TODO
 module.exports.addTodo = async (req, res) => {
   try {
-    const { todo } = req.body;
-
-    const newTodo = new Todo({ todo });
-    console.log(newTodo);
+    const data = req.body;
+    const newTodo = new Todo(data);
 
     await newTodo.save();
     res.send(newTodo);

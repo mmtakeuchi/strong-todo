@@ -2,7 +2,8 @@ import axios from 'axios';
 
 export const fetchTodos = async (url) => {
   try {
-    const response = await axios.get(url).then((resp) => resp);
+    const response = await axios.get(url).then((resp) => resp.data);
+
     console.log(response);
     return response;
   } catch (error) {
@@ -12,8 +13,8 @@ export const fetchTodos = async (url) => {
 
 export const postTodo = async (url, newTodo) => {
   try {
-    const response = await axios.post(url, newTodo).then((resp) => resp);
-    console.log(response);
+    const response = await axios.post(url, newTodo).then((resp) => resp.data);
+
     return response;
   } catch (error) {
     console.log(error);

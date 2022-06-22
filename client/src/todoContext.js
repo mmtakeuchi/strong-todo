@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 import { fetchTodos, postTodo, deleteTodo } from './utils';
 
 export const TodoContext = createContext({
@@ -8,31 +8,39 @@ export const TodoContext = createContext({
   removeTodo: () => {},
 });
 
-const TodoProvider = ({ children }) => {
-  const [todos, setTodos] = useState({});
+export const TodoContextProvider = ({ children }) => {
+  const [todos, setTodos] = useState([
+    { id: 1, todo: 'React medium', completed: false },
+  ]);
 
-  const getTodos = async () => {
-    const todos = await fetchTodos('/api/todos');
-    setTodos(todos);
-  };
+  console.log(todos);
 
   const addTodo = async (newTodo) => {
-    const addedTodo = await postTodo('/api/todos', newTodo);
+    const newTask = { todo: newTodo, completed: false };
+    const addedTodo = await postTodo('/api/todos', newTask);
+    console.log(addedTodo);
     const newTodos = [...todos, addedTodo];
-    setTodos(newTodos);
+    // setTodos(newTodos);
   };
 
   const removeTodo = async (todoId) => {
-    const deletedTodo = await deleteTodo(`/api/todos/${todoId}`);
+    await deleteTodo(`/api/todos/${todoId}`);
     const remainingTodos = todos.filer((todo) => todo.id !== todoId);
     setTodos(remainingTodos);
   };
 
+  useEffect(() => {
+    const getTodos = async () => {
+      const todos = await fetchTodos('/api/todos');
+      console.log(todos);
+      setTodos(todos);
+    };
+    getTodos();
+  }, []);
+
   return (
-    <TodoContext.Provider value={(todos, setTodos, addTodo, removeTodo)}>
+    <TodoContext.Provider value={{ todos, setTodos, addTodo, removeTodo }}>
       {children}
     </TodoContext.Provider>
   );
 };
-
-export default TodoProvider;
