@@ -2,7 +2,12 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const path = require('path');
+const cors = require('cors');
+const bodyParser = require('body-parser');
 require('dotenv').config();
+
+app.use(bodyParser.json());
+app.use(cors());
 
 const todoRoutes = require('./routes/todo');
 
@@ -18,12 +23,10 @@ mongoose
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.resolve(__dirname, './client/build')));
-  app.get('*', function (request, response) {
-    response.sendFile(path.resolve(__dirname, './client/build', 'index.html'));
-  });
-}
+app.use(express.static(path.resolve(__dirname, './client/build')));
+app.get('*', function (request, response) {
+  response.sendFile(path.resolve(__dirname, './client/build', 'index.html'));
+});
 
 app.use('/api', todoRoutes);
 

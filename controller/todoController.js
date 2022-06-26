@@ -9,7 +9,7 @@ module.exports.getTodos = async (req, res) => {
       res.send('Error getting todos.');
     }
 
-    res.send(todos);
+    res.json(todos);
   } catch (error) {
     console.log(error);
     res.send('Error getting todos.');
@@ -23,7 +23,7 @@ module.exports.addTodo = async (req, res) => {
     const newTodo = new Todo(data);
 
     await newTodo.save();
-    res.send(newTodo);
+    res.json(newTodo);
   } catch (error) {
     console.log(error);
     res.send('Error adding new todo.');
@@ -41,7 +41,7 @@ module.exports.updateTodo = async (req, res) => {
       updatedData
     );
 
-    res.send(updatedTodo);
+    res.json(updatedTodo);
   } catch (error) {
     console.log(error);
     res.send('Error deleting todo.');
