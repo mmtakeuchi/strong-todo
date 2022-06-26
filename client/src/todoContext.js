@@ -15,7 +15,7 @@ export const TodoContextProvider = ({ children }) => {
 
   const addTodo = async (newTodo) => {
     const newTask = { todo: newTodo, completed: false };
-    const addedTodo = await postTodo('/api/todos', newTask);
+    const addedTodo = await postTodo(newTask);
 
     const newTodos = [...todos, addedTodo];
     setUpdate(!update);
@@ -23,10 +23,7 @@ export const TodoContextProvider = ({ children }) => {
   };
 
   const updateTodo = async (editedTodo) => {
-    const updatedTodo = await putTodo(
-      `/api/todos/${editedTodo._id}`,
-      editedTodo
-    );
+    const updatedTodo = await putTodo(`${editedTodo._id}`, editedTodo);
     const updatedTodoList = [
       ...todos.filter((task) => task._id !== editedTodo._id),
       updatedTodo,
@@ -36,7 +33,7 @@ export const TodoContextProvider = ({ children }) => {
   };
 
   const removeTodo = async (todoId) => {
-    await deleteTodo(`/api/todos/${todoId}`);
+    await deleteTodo(`${todoId}`);
 
     const remainingTodos = todos.filter((todo) => todo._id !== todoId);
     setTodos(remainingTodos);
@@ -44,7 +41,7 @@ export const TodoContextProvider = ({ children }) => {
 
   useEffect(() => {
     const fetchTodos = async () => {
-      const todos = await getTodos('/api/todos');
+      const todos = await getTodos();
 
       setTodos(todos);
     };

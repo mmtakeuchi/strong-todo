@@ -1,8 +1,14 @@
 import axios from 'axios';
 
-export const getTodos = async (url) => {
+const BASE_URL =
+  process.env.NODE_ENV === 'production'
+    ? 'https://strong-todo.herokuapp.com/api/todos/'
+    : '/api/todos/';
+
+export const getTodos = async () => {
   try {
-    const response = await axios.get(url).then((resp) => resp.data);
+    console.log(BASE_URL);
+    const response = await axios.get(BASE_URL).then((resp) => resp.data);
 
     console.log(response);
     return response;
@@ -11,20 +17,10 @@ export const getTodos = async (url) => {
   }
 };
 
-export const postTodo = async (url, newTodo) => {
-  try {
-    const response = await axios.post(url, newTodo).then((resp) => resp.data);
-
-    return response;
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-export const putTodo = async (url, updatedTodo) => {
+export const postTodo = async (newTodo) => {
   try {
     const response = await axios
-      .put(url, updatedTodo)
+      .post(`${BASE_URL}`, newTodo)
       .then((resp) => resp.data);
 
     return response;
@@ -33,9 +29,23 @@ export const putTodo = async (url, updatedTodo) => {
   }
 };
 
-export const deleteTodo = async (url, todoId) => {
+export const putTodo = async (endpoint, updatedTodo) => {
   try {
-    const response = await axios.delete(url, todoId).then((resp) => resp.data);
+    const response = await axios
+      .put(`${BASE_URL}${endpoint}`, updatedTodo)
+      .then((resp) => resp.data);
+
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const deleteTodo = async (endpoint, todoId) => {
+  try {
+    const response = await axios
+      .delete(`${BASE_URL}${endpoint}`, todoId)
+      .then((resp) => resp.data);
 
     return response;
   } catch (error) {
