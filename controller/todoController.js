@@ -8,6 +8,7 @@ module.exports.getTodos = async (req, res) => {
     if (!todos) {
       res.send('Error getting todos.');
     }
+    console.log(todos);
 
     res.json(todos);
   } catch (error) {
