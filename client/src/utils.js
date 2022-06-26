@@ -7,10 +7,8 @@ const BASE_URL =
 
 export const getTodos = async () => {
   try {
-    console.log(BASE_URL);
     const response = await axios.get(BASE_URL).then((resp) => resp.data);
 
-    console.log(response);
     return response;
   } catch (error) {
     console.log(error);
