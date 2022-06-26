@@ -5,6 +5,7 @@ import './TodoList.scss';
 
 const TodoList = () => {
   const { todos, setTodos } = useContext(TodoContext);
+  console.log(todos);
 
   const moveTask = useCallback(
     (dragIndex, hoverIndex) => {

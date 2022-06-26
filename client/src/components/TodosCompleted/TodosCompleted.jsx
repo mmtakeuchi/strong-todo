@@ -4,8 +4,9 @@ import './TodosCompleted.scss';
 
 const TodosCompleted = () => {
   const { todos } = useContext(TodoContext);
+  console.log(todos);
 
-  const isCompleted = todos.filter((todo) => todo.completed).length;
+  const isCompleted = todos?.filter((todo) => todo.completed).length;
 
   return <div className="todos-completed">Completed: {isCompleted ?? 0}</div>;
 };
