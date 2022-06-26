@@ -4,6 +4,7 @@ export const getTodos = async (url) => {
   try {
     const response = await axios.get(url).then((resp) => resp.data);
 
+    console.log(response);
     return response;
   } catch (error) {
     console.log(error);
