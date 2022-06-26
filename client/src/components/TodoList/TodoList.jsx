@@ -23,7 +23,7 @@ const TodoList = () => {
 
   return (
     <div className="list-container">
-      {todos.length ? (
+      {todos.length > 0 ? (
         <ul className="todo-list">
           {todos?.map((todo, i) => (
             <Todo todo={todo} index={i} key={todo._id} moveTask={moveTask} />
